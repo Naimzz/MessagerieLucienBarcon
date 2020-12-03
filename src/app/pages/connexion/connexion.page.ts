@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.interface';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
@@ -13,6 +15,7 @@ import { FirestoreService } from '../../services/firestore.service';
 export class ConnexionPage implements OnInit {
 
   public userLoginForm: FormGroup;
+  public userList: Observable<User[]>;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -29,14 +32,24 @@ export class ConnexionPage implements OnInit {
   }
 
   ngOnInit() {
+
+    this.userList = this.firestoreService.getUserList();
   }
 
-  async createSong() {
-    const loading = await this.loadingCtrl.create();
-  
-    const username = this.userLoginForm.value.username;
+  async userLogin() {
+
+    const login = this.userLoginForm.value.username;
     const password = this.userLoginForm.value.password;
-  
-    return await loading.present();
+
+    this.userList.forEach(userArray => {
+      
+      userArray.forEach(user => {
+
+        if (user.login == login && user.mot_de_passe == password) {
+          
+          console.log("Connexion");
+        }
+      });
+    });    
   }
 }

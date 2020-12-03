@@ -17,9 +17,6 @@ export class HomePage implements OnInit {
   ngOnInit() {
     
     this.userList = this.firestoreService.getUserList();
-    
-    this.userList.forEach(user => {
-      console.log(user);
-    });
+  
   }
 }
