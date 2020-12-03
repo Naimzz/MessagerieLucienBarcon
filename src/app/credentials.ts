@@ -1,8 +1,9 @@
-export var firebasConfig = {
-    apiKey: 'AIzaSyBJT6tfre8uh3LGBm5CTiO5DUZ4',
-    authDomain: 'playground.firebaseapp.com',
-    databaseURL: 'https://playground.firebaseio.com',
-    projectId: 'playground',
-    storageBucket: 'playground.appspot.com',
-    messagingSenderId: '3676553551',
+export const firebaseConfig = {
+    apiKey: "AIzaSyDsx9bCVw3tfh3sv3E-dkHg8x_BrBdVhc0",
+    authDomain: "miniprojetmessagerie.firebaseapp.com",
+    projectId: "miniprojetmessagerie",
+    storageBucket: "miniprojetmessagerie.appspot.com",
+    messagingSenderId: "430116662828",
+    appId: "1:430116662828:web:15c68edc82295b467eab89",
+    measurementId: "G-P9538NE98P"
 };
