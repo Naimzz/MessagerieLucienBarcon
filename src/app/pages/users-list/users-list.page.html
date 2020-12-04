@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>users-list</ion-title>
+    <ion-title>Users List</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div *ngFor="let user of userList | async">
+    <ion-item *ngIf="user.auth_id != userId">
+      <ion-label>{{ user.nom }} {{ user.prenom }}</ion-label>
+      <ion-label>No message yet</ion-label>
+    </ion-item>
+  </div>
 </ion-content>

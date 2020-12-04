@@ -41,7 +41,9 @@ export class ConnexionPage implements OnInit {
 
     this.firestoreService.signIn(mail, password)
     .then(
-      () => {
+      (res) => {
+        console.log(res);
+        
         loading.dismiss().then(() => {
           this.router.navigateByUrl('users-list');
         });

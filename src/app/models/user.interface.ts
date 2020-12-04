@@ -5,6 +5,7 @@ export interface User {
     login: string;
     mail: string;
     mot_de_passe: string;
+    auth_id: string;
     nom: string;
     prenom: string;
   }
