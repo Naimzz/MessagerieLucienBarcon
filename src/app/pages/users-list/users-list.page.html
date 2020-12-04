@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let user of userList | async">
+  <div *ngFor="let user of userList | async" (click)="openConversation(user.auth_id)">
     <ion-item *ngIf="user.auth_id != userId">
       <ion-label>{{ user.nom }} {{ user.prenom }}</ion-label>
       <ion-label>No message yet</ion-label>

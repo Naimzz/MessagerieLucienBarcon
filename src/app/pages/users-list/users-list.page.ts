@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.interface';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -16,7 +17,8 @@ export class UsersListPage implements OnInit {
 
   constructor(
     private firestoreService: FirestoreService,
-    private firebase: AngularFireAuth
+    private firebase: AngularFireAuth,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -25,5 +27,15 @@ export class UsersListPage implements OnInit {
     this.firebase.authState.subscribe(user => {
       this.userId = user.uid;
     })
+  }
+
+  public openConversation(auth_id) {
+
+    this.router.navigate(['/conversation'], {
+      state: {
+        you: this.userId,
+        him: auth_id
+      }
+    });
   }
 }
