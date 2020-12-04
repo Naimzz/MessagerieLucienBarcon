@@ -21,11 +21,11 @@ export class ConnexionPage implements OnInit {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     private firestoreService: FirestoreService,
-    formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router
     ) { 
 
-      this.userLoginForm = formBuilder.group({
+      this.userLoginForm = this.formBuilder.group({
         username: ['', Validators.required],
         password: ['', Validators.required]
       });

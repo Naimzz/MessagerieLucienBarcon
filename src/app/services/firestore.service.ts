@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
 
-  constructor(public firestore: AngularFirestore) { }
+  constructor(public firestore: AngularFirestore, public firebase: AngularFireAuth) { }
 
   getUserList(): Observable<User[]> {
     return this.firestore.collection<User>(`users`).valueChanges();
@@ -24,15 +25,23 @@ export class FirestoreService {
     const adresse = usersInfo.adress;
     const date_de_naissance = usersInfo.birthday;
   
+    this.firebase.createUserWithEmailAndPassword(mail, mot_de_passe)
+    .then((user) => {
+      // Signed in 
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+    
     return this.firestore.doc(`users/${id}`).set({
-      id,
-      adresse,
-      date_de_naissance,
-      login,
-      mail,
-      mot_de_passe,
       nom,
-      prenom
+      prenom,
+      login,
+      adresse,
+      date_de_naissance
     });
   }
 }
