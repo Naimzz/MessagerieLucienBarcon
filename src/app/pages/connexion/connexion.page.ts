@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
@@ -15,6 +17,8 @@ export class ConnexionPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private firestoreService: FirestoreService,
+    public loadingCtrl: LoadingController,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -30,9 +34,28 @@ export class ConnexionPage implements OnInit {
 
   async userLogin() {
 
+    const loading = await this.loadingCtrl.create();
+
     const mail = this.userLoginForm.value.email;
     const password = this.userLoginForm.value.password;
 
-    this.firestoreService.signIn(mail, password);
+    this.firestoreService.signIn(mail, password)
+    .then(
+      () => {
+        loading.dismiss().then(() => {
+          this.router.navigateByUrl('users-list');
+        });
+      },
+    )
+    .catch(
+      error => {
+        
+        loading.dismiss().then(() => {
+          console.error(error);
+        });
+      }
+    );
+
+    return await loading.present();
   }
 }

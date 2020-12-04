@@ -45,13 +45,8 @@ export class FirestoreService {
     });
   }
 
-  public signIn(email: string, password: string) {
-    this.firebase.signInWithEmailAndPassword(email, password)
-    .then(res => {
-      console.log('You are Successfully logged in!');
-    })
-    .catch(err => {
-      console.log('Something is wrong:',err.message);
-    });
+  public signIn(email: string, password: string): Promise<any> {
+
+    return this.firebase.signInWithEmailAndPassword(email, password);
   }
 }
