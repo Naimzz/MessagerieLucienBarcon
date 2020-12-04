@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user.interface';
 import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
@@ -20,18 +18,21 @@ export class CreateAccountPage implements OnInit {
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     private firestoreService: FirestoreService,
-    formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private router: Router
-  ) { 
-    this.createUserForm = formBuilder.group({
+  ) { }
+
+  ngOnInit() {
+
+    this.createUserForm = this.formBuilder.group({
       name: ['', Validators.required],
       lastname: ['', Validators.required],
       login: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', Validators.minLength(6)],
       passwordValidation: ['', Validators.required],
       mail: ['', Validators.compose([
         Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
       ])],
       adress: ['', Validators.required],
       birthday: ['', Validators.required]
@@ -41,9 +42,9 @@ export class CreateAccountPage implements OnInit {
   async createUser() {
 
     if (this.createUserForm.value.password == this.createUserForm.value.passwordValidation) {
-      
+
       const loading = await this.loadingCtrl.create();
-    
+
       const params = {
         name: this.createUserForm.value.name,
         lastname: this.createUserForm.value.lastname,
@@ -54,7 +55,7 @@ export class CreateAccountPage implements OnInit {
         adress: this.createUserForm.value.adress,
         birthday: this.createUserForm.value.birthday,
       }
-    
+
       this.firestoreService
         .createUser(params)
         .then(
@@ -69,12 +70,8 @@ export class CreateAccountPage implements OnInit {
             });
           }
         );
-    
+
       return await loading.present();
     }
   }
-
-  ngOnInit() {
-  }
-
 }

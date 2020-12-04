@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController, AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/models/user.interface';
-import { FirestoreService } from '../../services/firestore.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-connexion',
@@ -15,41 +11,28 @@ import { FirestoreService } from '../../services/firestore.service';
 export class ConnexionPage implements OnInit {
 
   public userLoginForm: FormGroup;
-  public userList: Observable<User[]>;
 
   constructor(
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    private firestoreService: FirestoreService,
     private formBuilder: FormBuilder,
-    private router: Router
-    ) { 
-
-      this.userLoginForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        password: ['', Validators.required]
-      });
-  }
+    private firestoreService: FirestoreService,
+    ) { }
 
   ngOnInit() {
-
-    this.userList = this.firestoreService.getUserList();
+    this.userLoginForm = this.formBuilder.group({
+      email: ['', 
+      Validators.compose([
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      ])],
+      password: ['', Validators.required]
+    });
   }
 
   async userLogin() {
 
-    const login = this.userLoginForm.value.username;
+    const mail = this.userLoginForm.value.email;
     const password = this.userLoginForm.value.password;
 
-    this.userList.forEach(userArray => {
-      
-      userArray.forEach(user => {  
-
-        if (user.login == login && user.mot_de_passe == password) {
-          
-          console.log("Connexion");
-        }
-      });
-    });    
+    this.firestoreService.signIn(mail, password);
   }
 }

@@ -8,67 +8,38 @@
   <form class="form" [formGroup]="createUserForm" (submit)="createUser()">
     <ion-item>
       <ion-label>First Name : </ion-label>
-      <ion-input
-        formControlName="name"
-        type="text"
-      >
-      </ion-input>
+      <ion-input formControlName="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Last Name : </ion-label>
-      <ion-input
-        formControlName="lastname"
-        type="text"
-      >
-      </ion-input>
+      <ion-input formControlName="lastname" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Login : </ion-label>
-      <ion-input
-        formControlName="login"
-        type="text"
-      >
-      </ion-input>
+      <ion-input formControlName="login" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Password : </ion-label>
-      <ion-input
-        formControlName="password"
-        type="password"
-      >
-      </ion-input>
+      <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Repeat Password : </ion-label>
-      <ion-input
-        formControlName="passwordValidation"
-        type="password"
-      >
+      <ion-input formControlName="passwordValidation" type="password">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Mail : </ion-label>
-      <ion-input
-        formControlName="mail"
-        type="email"
-      >
+      <ion-input formControlName="mail" type="email">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Adress : </ion-label>
-      <ion-input
-        formControlName="adress"
-        type="text"
-      >
+      <ion-input formControlName="adress" type="text">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>BirthDay : </ion-label>
-      <ion-input
-        formControlName="birthday"
-        type="date"
-      >
-      </ion-input>
+      <ion-input formControlName="birthday" type="date"></ion-input>
     </ion-item>
     <ion-button expand="block" type="submit" [disabled]="!createUserForm.valid">
       Login

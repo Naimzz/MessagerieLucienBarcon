@@ -44,4 +44,14 @@ export class FirestoreService {
       date_de_naissance
     });
   }
+
+  public signIn(email: string, password: string) {
+    this.firebase.signInWithEmailAndPassword(email, password)
+    .then(res => {
+      console.log('You are Successfully logged in!');
+    })
+    .catch(err => {
+      console.log('Something is wrong:',err.message);
+    });
+  }
 }

@@ -7,20 +7,12 @@
 <ion-content>
   <form class="form" [formGroup]="userLoginForm" (submit)="userLogin()">
     <ion-item>
-      <ion-label>Username : </ion-label>
-      <ion-input
-        formControlName="username"
-        type="text"
-      >
-      </ion-input>
+      <ion-label>E-mail : </ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Password : </ion-label>
-      <ion-input
-        formControlName="password"
-        type="password"
-      >
-      </ion-input>
+      <ion-input formControlName="password" type="password"></ion-input>
     </ion-item>
     <ion-button expand="block" type="submit" [disabled]="!userLoginForm.valid">
       Login
