@@ -7,8 +7,11 @@
 <ion-content>
   <div class="messages">
     <div *ngFor="let message of messageList | async">
-      <ion-label class="message" *ngIf="(message.id_destinataire == users_ids.him && message.id_envoyeur == users_ids.you) ||
-      (message.id_destinataire == users_ids.you && message.id_envoyeur == users_ids.him)">
+      <ion-label class="message right" *ngIf="message.id_destinataire == users_ids.him && message.id_envoyeur == users_ids.you">
+        <ion-label>{{ message.contenu }}</ion-label>
+        <ion-label class="date">{{ message.date_envoi.toMillis() | date }}</ion-label>
+      </ion-label>
+      <ion-label class="message left" *ngIf="message.id_destinataire == users_ids.you && message.id_envoyeur == users_ids.him">
         <ion-label>{{ message.contenu }}</ion-label>
         <ion-label class="date">{{ message.date_envoi.toMillis() | date }}</ion-label>
       </ion-label>
