@@ -14,7 +14,7 @@
   </div>
 
   <ion-item class="bottom">
-    <ion-input type="text" placeholder="Entrer un message"></ion-input>
-    <button clear item-right>Envoyer</button>
+    <ion-input type="text" [(ngModel)]="message" placeholder="Entrer un message"></ion-input>
+    <button clear item-right (click)="sendMessage()">Envoyer</button>
   </ion-item>   
 </ion-content>

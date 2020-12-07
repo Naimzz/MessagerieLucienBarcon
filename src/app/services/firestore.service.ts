@@ -56,6 +56,19 @@ export class FirestoreService {
     });
   }
 
+  public sendMessage(contenu, id_destinataire, id_envoyeur) {
+
+    const id = this.firestore.createId();
+    const date_envoi = new Date();
+
+    return this.firestore.doc(`messages/${id}`).set({
+      contenu,
+      id_destinataire,
+      id_envoyeur,
+      date_envoi
+    });
+  }
+
   public signIn(email: string, password: string): Promise<any> {
 
     return this.firebase.signInWithEmailAndPassword(email, password);
