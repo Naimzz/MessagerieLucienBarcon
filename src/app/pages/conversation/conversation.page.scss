@@ -1,0 +1,19 @@
+.message {
+
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+
+    .date {
+
+        font-size: 10px;
+        margin-top: 10px;
+    }
+}
+
+.bottom {
+
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}

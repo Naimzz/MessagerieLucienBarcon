@@ -29,12 +29,13 @@ export class UsersListPage implements OnInit {
     })
   }
 
-  public openConversation(auth_id) {
+  public openConversation(auth_id, name) {
 
     this.router.navigate(['/conversation'], {
       state: {
         you: this.userId,
-        him: auth_id
+        him: auth_id,
+        name: name
       }
     });
   }

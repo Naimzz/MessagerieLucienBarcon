@@ -24,7 +24,9 @@ export class ConversationPage implements OnInit {
     if (this.router.getCurrentNavigation().extras.state) {
       
       this.users_ids = this.router.getCurrentNavigation().extras.state;
-      console.log(this.users_ids.him);
+    } else {
+
+      this.router.navigateByUrl('');
     }
     this.messageList = this.firestoreService.getMessagesList();
   }
