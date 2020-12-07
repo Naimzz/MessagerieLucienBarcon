@@ -5,5 +5,10 @@
 </ion-header>
 
 <ion-content>
-
+  <div *ngFor="let message of messageList | async">
+    <ion-item *ngIf="(message.id_destinataire == users_ids.him && message.id_envoyeur == users_ids.you) ||
+    (message.id_destinataire == users_ids.you && message.id_envoyeur == users_ids.him)">
+      <p>{{ message.contenu }}</p>
+    </ion-item>
+  </div>
 </ion-content>

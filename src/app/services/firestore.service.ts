@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Message } from '../models/message.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,11 @@ export class FirestoreService {
 
   getUserList(): Observable<User[]> {
     return this.firestore.collection<User>(`users`).valueChanges();
+  }
+
+  getMessagesList() {
+    
+    return this.firestore.collection<Message>(`messages`).valueChanges();
   }
 
   async createUser(usersInfo): Promise<void> {
