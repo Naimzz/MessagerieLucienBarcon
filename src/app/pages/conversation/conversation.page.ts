@@ -12,7 +12,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class ConversationPage implements OnInit {
 
-  private users_ids: any;
+  private users_ids: any = [];
   public messageList: Observable<Message[]>;
   public message: String = "";
 
@@ -45,6 +45,7 @@ export class ConversationPage implements OnInit {
         .then(
           () => {
             loading.dismiss().then(() => {
+              this.message = "";
               this.messageList = this.firestoreService.getMessagesList();
             });
           },

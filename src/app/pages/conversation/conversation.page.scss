@@ -1,13 +1,19 @@
-.message {
+.messages {
 
-    display: flex;
-    flex-direction: column;
-    padding: 16px;
+    max-height: 90%;
+    overflow: scroll;
 
-    .date {
+    .message {
 
-        font-size: 10px;
-        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+    
+        .date {
+    
+            font-size: 10px;
+            margin-top: 10px;
+        }
     }
 }
 
