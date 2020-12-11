@@ -25,9 +25,7 @@ export class FirestoreService {
 
   getMessagesList() {
     
-    return this.firestore.collection<Message>(`messages`).valueChanges().pipe(
-      map(events => events.sort((a, b) => parseInt(a.date_envoi) - parseInt(b.date_envoi)))
-    );
+    return this.firestore.collection<Message>(`messages`, ref => ref.orderBy('date_envoi')).valueChanges();
   }
 
   async createUser(usersInfo): Promise<void> {

@@ -50,7 +50,6 @@ export class ConversationPage implements OnInit {
               this.message = "";
               this.firestoreService.getMessagesList().subscribe(events => {
                 this.messageList = events;
-                this.messageList.reverse();
               }); 
             });
           },
