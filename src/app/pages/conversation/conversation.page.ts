@@ -33,7 +33,6 @@ export class ConversationPage implements OnInit {
     }
     this.firestoreService.getMessagesList().subscribe(events => {
       this.messageList = events;
-      this.messageList.reverse();
     });
   }
 

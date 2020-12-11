@@ -8,4 +8,5 @@ export interface User {
     auth_id: string;
     nom: string;
     prenom: string;
+    last_message: string;
   }
