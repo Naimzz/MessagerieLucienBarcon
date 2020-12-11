@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Message } from '../models/message.interface';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +19,19 @@ export class FirestoreService {
     return this.firestore.collection<User>(`users`).valueChanges();
   }
 
+  getUserById(userId: string): Observable<User> {
+    return this.firestore.collection('users').doc<User>(userId).valueChanges();
+  }
+
   getMessagesList() {
     
-    return this.firestore.collection<Message>(`messages`).valueChanges();
+    return this.firestore.collection<Message>(`messages`).valueChanges().pipe(
+      map(events => events.sort((a, b) => parseInt(a.date_envoi) - parseInt(b.date_envoi)))
+    );
   }
 
   async createUser(usersInfo): Promise<void> {
-    const id = this.firestore.createId();
+
     const nom = usersInfo.name;
     const prenom = usersInfo.lastname;
     const login = usersInfo.login;
@@ -45,7 +52,7 @@ export class FirestoreService {
       var errorMessage = error.message;
     });
     
-    return this.firestore.doc(`users/${id}`).set({
+    return this.firestore.doc(`users/${auth_id}`).set({
       nom,
       prenom,
       login,

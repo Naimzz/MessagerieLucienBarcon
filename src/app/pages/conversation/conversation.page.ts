@@ -13,7 +13,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class ConversationPage implements OnInit {
 
   private users_ids: any = [];
-  public messageList: Observable<Message[]>;
+  public messageList: Message[];
   public message: String = "";
 
   constructor(
@@ -31,7 +31,10 @@ export class ConversationPage implements OnInit {
 
       this.router.navigateByUrl('');
     }
-    this.messageList = this.firestoreService.getMessagesList();
+    this.firestoreService.getMessagesList().subscribe(events => {
+      this.messageList = events;
+      this.messageList.reverse();
+    });
   }
 
   async sendMessage() {
@@ -46,7 +49,10 @@ export class ConversationPage implements OnInit {
           () => {
             loading.dismiss().then(() => {
               this.message = "";
-              this.messageList = this.firestoreService.getMessagesList();
+              this.firestoreService.getMessagesList().subscribe(events => {
+                this.messageList = events;
+                this.messageList.reverse();
+              }); 
             });
           },
           error => {
@@ -58,5 +64,14 @@ export class ConversationPage implements OnInit {
 
       return await loading.present();
     }
+  }
+
+  public openProfile(auth_id) {
+
+    this.router.navigate(['/user-profile'], {
+      state: {
+        id: auth_id
+      }
+    });
   }
 }
