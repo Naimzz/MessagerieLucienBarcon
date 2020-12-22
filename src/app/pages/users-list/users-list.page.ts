@@ -42,11 +42,11 @@ export class UsersListPage implements OnInit {
 
     this.userList.forEach(user => {
 
-      user.last_message = "";
+      user.last_message = "Aucun message !";
       
       this.messageList.forEach(message => {
 
-        if (message.id_destinataire == user.auth_id || message.id_envoyeur == user.auth_id) {
+        if ((message.id_destinataire == user.auth_id && message.id_envoyeur == this.userId) || (message.id_envoyeur == user.auth_id && message.id_destinataire == this.userId)) {
           
           user.last_message = message.contenu;
         }
